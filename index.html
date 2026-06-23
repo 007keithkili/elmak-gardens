@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elmak Gardens — Where Nature Meets Celebration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-deep: #1a3c2a;
+            --green-medium: #2d5a3f;
+            --green-soft: #4a7c59;
+            --green-light: #8ab89a;
+            --gold: #c9a96e;
+            --gold-light: #e0c78a;
+            --cream: #faf7f2;
+            --cream-dark: #f0ebe0;
+            --white: #ffffff;
+            --text-dark: #2c2416;
+            --text-medium: #5c4f3a;
+            --text-light: #8a7b65;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 16px 60px rgba(0, 0, 0, 0.15);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-medium);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--cream);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            pointer-events: all;
+        }
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loader-flower {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--green-soft);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spinLoader 1s linear infinite;
+        }
+        @keyframes spinLoader {
+            to { transform: rotate(360deg); }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all var(--transition);
+            background: transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(250, 247, 242, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 0.7rem 3rem;
+            box-shadow: var(--shadow-md);
+        }
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: color var(--transition);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .navbar.scrolled .nav-logo {
+            color: var(--green-deep);
+            text-shadow: none;
+        }
+        .nav-logo span {
+            color: var(--gold-light);
+            font-style: italic;
+        }
+        .navbar.scrolled .nav-logo span {
+            color: var(--gold);
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all var(--transition);
+            position: relative;
+            padding-bottom: 4px;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+        }
+        .navbar.scrolled .nav-links a {
+            color: var(--text-medium);
+            text-shadow: none;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--gold-light);
+            transition: width var(--transition);
+        }
+        .navbar.scrolled .nav-links a::after {
+            background: var(--gold);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a:hover {
+            color: var(--gold-light);
+        }
+        .navbar.scrolled .nav-links a:hover {
+            color: var(--gold);
+        }
+        .nav-cta {
+            background: var(--gold);
+            color: var(--white) !important;
+            padding: 0.6rem 1.6rem !important;
+            border-radius: 50px;
+            text-shadow: none !important;
+            font-weight: 500 !important;
+            letter-spacing: 1px !important;
+            transition: all var(--transition) !important;
+            box-shadow: 0 4px 15px rgba(201, 169, 110, 0.35);
+        }
+        .nav-cta:hover {
+            background: var(--gold-light) !important;
+            color: var(--white) !important;
+            box-shadow: 0 6px 25px rgba(201, 169, 110, 0.5) !important;
+            transform: translateY(-2px);
+        }
+        .nav-cta::after {
+            display: none !important;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: all var(--transition);
+            border-radius: 2px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        }
+        .navbar.scrolled .hamburger span {
+            background: var(--green-deep);
+            box-shadow: none;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-slider {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            animation: heroFade 18s infinite;
+        }
+        .hero-slide:nth-child(1) {
+            background-image: url('https://images.unsplash.com/photo-1510076857177-7470076d4098?w=1920&q=80');
+            animation-delay: 0s;
+        }
+        .hero-slide:nth-child(2) {
+            background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1920&q=80');
+            animation-delay: 6s;
+        }
+        .hero-slide:nth-child(3) {
+            background-image: url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1920&q=80');
+            animation-delay: 12s;
+        }
+        @keyframes heroFade {
+            0%, 28% { opacity: 1; }
+            33%, 94% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(20, 35, 25, 0.55) 0%, rgba(20, 35, 25, 0.35) 40%, rgba(20, 35, 25, 0.5) 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--white);
+            max-width: 850px;
+            padding: 0 2rem;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-tag {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: var(--gold-light);
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5.5rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            line-height: 1.05;
+            margin-bottom: 1.2rem;
+            color: var(--gold);
+            text-shadow: 0 3px 25px rgba(0, 0, 0, 0.35);
+        }
+        .hero-title em {
+            font-style: italic;
+            color: var(--green-light);
+        }
+        .hero-subtitle {
+            font-size: 1.15rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all var(--transition);
+            border: none;
+            outline: none;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--white);
+            box-shadow: 0 6px 30px rgba(201, 169, 110, 0.4);
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(201, 169, 110, 0.55);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.7);
+        }
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--white);
+            transform: translateY(-3px);
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: bounceDown 2s infinite;
+            cursor: pointer;
+        }
+        .scroll-indicator span {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .scroll-line {
+            width: 1.5px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 2px;
+        }
+        @keyframes bounceDown {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(12px); }
+        }
+
+        .section {
+            padding: 7rem 3rem;
+            position: relative;
+        }
+        .section-label {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 0.3rem;
+            letter-spacing: 1px;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: var(--green-deep);
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+        .section-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto 2.5rem;
+            border-radius: 1px;
+        }
+        .section-desc {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 4rem;
+            color: var(--text-medium);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        #about {
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        #about::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -120px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(138, 184, 154, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .about-image-wrapper {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            aspect-ratio: 4/3;
+        }
+        .about-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+        .about-image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+        .about-image-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 3px solid var(--gold);
+            border-radius: var(--radius-lg);
+            top: 15px;
+            left: 15px;
+            right: -15px;
+            bottom: -15px;
+            z-index: -1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .about-text h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            color: var(--green-deep);
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        .about-text p {
+            margin-bottom: 1.2rem;
+            color: var(--text-medium);
+            line-height: 1.9;
+        }
+        .about-features {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 500;
+            color: var(--green-medium);
+            font-size: 0.95rem;
+        }
+        .about-feature .feat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(138, 184, 154, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .image-ribbon {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            height: 350px;
+            overflow: hidden;
+        }
+        .image-ribbon-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .image-ribbon-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+            display: block;
+        }
+        .image-ribbon-item:hover img {
+            transform: scale(1.1);
+        }
+        .image-ribbon-item .ribbon-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(26, 60, 42, 0.35);
+            transition: background var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-ribbon-item:hover .ribbon-overlay {
+            background: rgba(26, 60, 42, 0.15);
+        }
+        .ribbon-label {
+            color: var(--white);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            transition: transform var(--transition);
+        }
+        .image-ribbon-item:hover .ribbon-label {
+            transform: translateY(-5px);
+        }
+
+        #weddings {
+            background: var(--cream);
+            position: relative;
+        }
+        .weddings-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .wedding-card {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            background: var(--white);
+            transition: all var(--transition);
+            cursor: pointer;
+        }
+        .wedding-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+        .wedding-card-image {
+            height: 280px;
+            overflow: hidden;
+        }
+        .wedding-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        .wedding-card:hover .wedding-card-image img {
+            transform: scale(1.08);
+        }
+        .wedding-card-body {
+            padding: 1.8rem;
+            text-align: center;
+        }
+        .wedding-card-body h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--green-deep);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        .wedding-card-body p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        #nature {
+            background: var(--white);
+            position: relative;
+        }
+        .nature-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        .nature-image {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            aspect-ratio: 16/10;
+        }
+        .nature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+        .nature-image:hover img {
+            transform: scale(1.04);
+        }
+        .nature-text h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            color: var(--green-deep);
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+        .nature-text .river-highlight {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .nature-text p {
+            color: var(--text-medium);
+            line-height: 1.9;
+            margin-bottom: 1rem;
+        }
+
+        /* ---------- AMENITIES (updated with real images) ---------- */
+        #amenities {
+            background: var(--cream-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        #amenities::before {
+            content: '';
+            position: absolute;
+            top: -150px;
+            left: -150px;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(138, 184, 154, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .amenities-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .amenity-card {
+            flex: 1 1 280px;
+            max-width: 340px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 0;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+        }
+        .amenity-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+        }
+        .amenity-icon-wrap {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, var(--green-soft) 0%, var(--green-medium) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.5s ease;
+            position: relative;
+        }
+        .amenity-icon-wrap img.icon {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+            transition: transform 0.5s ease;
+        }
+        .amenity-card:hover .amenity-icon-wrap {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+        }
+        .amenity-card:hover .amenity-icon-wrap img.icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+        .amenity-card-body {
+            padding: 2rem 1.8rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+        .amenity-card-body h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            color: var(--green-deep);
+            margin-bottom: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        .amenity-card:hover .amenity-card-body h4 {
+            color: var(--gold);
+        }
+        .amenity-card-body .desc {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            opacity: 0.85;
+            transition: opacity 0.4s;
+        }
+        .amenity-card:hover .amenity-card-body .desc {
+            opacity: 1;
+        }
+        .amenity-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.5s ease;
+        }
+        .amenity-card:hover::after {
+            transform: scaleX(0.8);
+        }
+
+        #gallery {
+            background: var(--white);
+        }
+        .gallery-masonry {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 220px;
+            gap: 1rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .gallery-item {
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition);
+        }
+        .gallery-item:hover {
+            box-shadow: var(--shadow-lg);
+            transform: scale(1.02);
+            z-index: 2;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.7s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-item.tall {
+            grid-row: span 2;
+        }
+        .gallery-item.wide {
+            grid-column: span 2;
+        }
+        .gallery-item .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(26, 60, 42, 0);
+            transition: background var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gallery-item:hover .gallery-overlay {
+            background: rgba(26, 60, 42, 0.3);
+        }
+        .gallery-overlay span {
+            color: var(--white);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all var(--transition);
+            letter-spacing: 1px;
+        }
+        .gallery-item:hover .gallery-overlay span {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #testimonials {
+            background: var(--green-deep);
+            color: var(--white);
+            text-align: center;
+        }
+        #testimonials .section-label {
+            color: var(--gold-light);
+        }
+        #testimonials .section-title {
+            color: var(--white);
+        }
+        #testimonials .section-divider {
+            background: var(--gold-light);
+        }
+        .testimonial-slider {
+            max-width: 750px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .testimonial-card {
+            padding: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .testimonial-author {
+            margin-top: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-style: normal;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold-light);
+        }
+
+        #contact {
+            background: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+        #contact::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(138, 184, 154, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .contact-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--green-deep);
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+        .contact-info p {
+            margin-bottom: 2rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+        }
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .contact-detail .cd-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(138, 184, 154, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .contact-form {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            margin-bottom: 1rem;
+            border: 1.5px solid #e0d9cc;
+            border-radius: var(--radius-sm);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            transition: all var(--transition);
+            background: var(--cream);
+            color: var(--text-dark);
+            resize: vertical;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.08);
+            background: var(--white);
+        }
+        .contact-form textarea {
+            min-height: 120px;
+        }
+        .contact-form .btn {
+            width: 100%;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        footer {
+            background: var(--green-deep);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            padding: 3rem 2rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        footer .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+            letter-spacing: 2px;
+        }
+        footer .footer-logo span {
+            color: var(--gold-light);
+            font-style: italic;
+        }
+        footer .footer-social {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        footer .footer-social a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color var(--transition);
+        }
+        footer .footer-social a:hover {
+            color: var(--gold-light);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 1024px) {
+            .hero-title { font-size: 4rem; letter-spacing: 2px; }
+            .hero-tag { font-size: 1.7rem; }
+            .section { padding: 5rem 2rem; }
+            .section-title { font-size: 2.8rem; }
+            .about-grid, .nature-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
+            .about-image-wrapper::after { display: none; }
+            .weddings-showcase { grid-template-columns: repeat(2, 1fr); }
+            .amenities-grid { gap: 2rem; }
+            .amenity-card { flex: 1 1 250px; max-width: 300px; }
+            .gallery-masonry { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 180px; }
+            .image-ribbon { grid-template-columns: repeat(2, 1fr); height: auto; grid-auto-rows: 250px; }
+            .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: rgba(250, 247, 242, 0.98); backdrop-filter: blur(20px); flex-direction: column; padding: 6rem 2rem 2rem; gap: 1.8rem; box-shadow: var(--shadow-xl); z-index: 999; transform: translateX(100%); transition: transform var(--transition); }
+            .nav-links.active { display: flex; transform: translateX(0); }
+            .nav-links a { color: var(--text-medium) !important; text-shadow: none !important; font-size: 0.95rem; }
+            .nav-links a::after { background: var(--gold); }
+            .nav-cta { color: var(--white) !important; text-align: center; }
+            .hamburger { display: flex; }
+            .navbar { padding: 1rem 2rem; }
+            .navbar.scrolled { padding: 0.7rem 2rem; }
+        }
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.8rem; letter-spacing: 1px; }
+            .hero-tag { font-size: 1.4rem; }
+            .hero-subtitle { font-size: 0.85rem; letter-spacing: 2px; }
+            .section { padding: 4rem 1.2rem; }
+            .section-title { font-size: 2.2rem; }
+            .weddings-showcase { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
+            .amenities-grid { flex-direction: column; align-items: center; }
+            .amenity-card { max-width: 380px; width: 100%; }
+            .gallery-masonry { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; gap: 0.6rem; }
+            .gallery-item.wide { grid-column: span 1; }
+            .gallery-item.tall { grid-row: span 1; }
+            .image-ribbon { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn { padding: 0.75rem 2rem; font-size: 0.8rem; letter-spacing: 1.5px; }
+            .contact-form { padding: 1.5rem; }
+            .about-features { flex-direction: column; gap: 1rem; }
+        }
+        @media (max-width: 480px) {
+            .hero-title { font-size: 2.2rem; }
+            .hero-tag { font-size: 1.2rem; }
+            .gallery-masonry { grid-template-columns: 1fr 1fr; grid-auto-rows: 130px; gap: 0.4rem; }
+            .image-ribbon { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+            .navbar { padding: 0.8rem 1.2rem; }
+            .nav-logo { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="preloader"><div class="loader-flower"></div></div>
+
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo">Elmak <span>Gardens</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#weddings" onclick="closeMenu()">Weddings</a></li>
+            <li><a href="#nature" onclick="closeMenu()">The River</a></li>
+            <li><a href="#amenities" onclick="closeMenu()">Amenities</a></li>
+            <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+            <li><a href="#contact" class="nav-cta" onclick="closeMenu()">Book a Visit</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-slider">
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-tag">Where nature embraces your story</p>
+            <h1 class="hero-title">Elmak <em>Gardens</em></h1>
+            <p class="hero-subtitle">A Riverside Sanctuary for Life's Most Beautiful Moments</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Enquire Now</a>
+                <a href="#gallery" class="btn btn-outline">Explore Gallery</a>
+            </div>
+        </div>
+        <div class="scroll-indicator" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <div class="image-ribbon">
+        <div class="image-ribbon-item"><img src="https://i.pinimg.com/736x/05/09/ae/0509ae560e8b804e8a2bfc5794bb6a89.jpg" alt="Garden landscape" loading="lazy"><div class="ribbon-overlay"><span class="ribbon-label">Lush Gardens</span></div></div>
+        <div class="image-ribbon-item"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80" alt="Wedding setup" loading="lazy"><div class="ribbon-overlay"><span class="ribbon-label">Weddings</span></div></div>
+        <div class="image-ribbon-item"><img src="https://i.pinimg.com/1200x/da/51/f5/da51f557a0c69ac8ded09dbcced9122d.jpg" alt="River view" loading="lazy"><div class="ribbon-overlay"><span class="ribbon-label">The River</span></div></div>
+        <div class="image-ribbon-item"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Dining area" loading="lazy"><div class="ribbon-overlay"><span class="ribbon-label">Dining</span></div></div>
+    </div>
+
+    <section class="section" id="about">
+        <p class="section-label">Discover</p>
+        <h2 class="section-title">The Story of Elmak Gardens</h2>
+        <div class="section-divider"></div>
+        <div class="about-grid">
+            <div class="about-image-wrapper reveal"><img src="https://images.unsplash.com/photo-1510076857177-7470076d4098?w=800&q=80" alt="Elmak Gardens landscape" loading="lazy"></div>
+            <div class="about-text reveal">
+                <h3>A Hidden Gem in Nature's Embrace</h3>
+                <p>Nestled along the gentle banks of a crystalline river, Elmak Gardens is more than a venue — it's a living canvas where manicured lawns meet wildflower meadows, and every breeze carries the scent of blooming jasmine and fresh earth.</p>
+                <p>Our gardens were designed with intention: to create a space where celebrations feel effortless, where the boundary between indoors and outdoors dissolves, and where every guest feels the warmth of nature's hospitality.</p>
+                <div class="about-features">
+                    <div class="about-feature"><span class="feat-icon">🌿</span> Spacious Gardens</div>
+                    <div class="about-feature"><span class="feat-icon">💧</span> Riverfront Access</div>
+                    <div class="about-feature"><span class="feat-icon">🌸</span> 30+ Flower Species</div>
+                    <div class="about-feature"><span class="feat-icon">🕊️</span> Peaceful Ambiance</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="weddings">
+        <p class="section-label">Celebrate Love</p>
+        <h2 class="section-title">Weddings at Elmak</h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">From intimate ceremonies under ancient oak trees to grand receptions on our riverside lawn, every wedding at Elmak Gardens is woven with natural beauty and timeless elegance.</p>
+        <div class="weddings-showcase">
+            <div class="wedding-card reveal"><div class="wedding-card-image"><img src="https://i.pinimg.com/1200x/b5/9f/9f/b59f9f32fa3a342878e94e94ee3b6715.jpg" alt="Garden ceremony" loading="lazy"></div><div class="wedding-card-body"><h4>Garden Ceremonies</h4><p>Exchange vows surrounded by roses, lavender, and the soft murmur of the river.</p></div></div>
+            <div class="wedding-card reveal"><div class="wedding-card-image"><img src="https://i.pinimg.com/736x/1e/72/a2/1e72a210f9e2830e2449d6ffb8fcc0bc.jpg" alt="Reception setup" loading="lazy"></div><div class="wedding-card-body"><h4>Riverside Receptions</h4><p>Dine under festoon lights as the sun sets over the water — pure magic.</p></div></div>
+            <div class="wedding-card reveal"><div class="wedding-card-image"><img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?w=600&q=80" alt="Evening event" loading="lazy"></div><div class="wedding-card-body"><h4>Evening Soirées</h4><p>When the gardens glow with lantern light, the celebration takes on a life of its own.</p></div></div>
+        </div>
+    </section>
+
+    <section class="section" id="nature">
+        <p class="section-label">Nature's Gift</p>
+        <h2 class="section-title">The River That Runs Through</h2>
+        <div class="section-divider"></div>
+        <div class="nature-grid">
+            <div class="nature-image reveal"><img src="https://i.pinimg.com/736x/b9/6f/78/b96f784caf1009c1656351790dea7a60.jpg" alt="River at Elmak Gardens" loading="lazy"></div>
+            <div class="nature-text reveal">
+                <span class="river-highlight">A gentle stream of serenity</span>
+                <h3>Connected to Nature</h3>
+                <p>A small, crystal-clear river winds along the edge of Elmak Gardens, its soft babbling providing the perfect natural soundtrack to your event. The riverbank is lined with weeping willows and wild irises, creating secluded nooks perfect for quiet reflection or stunning photographs.</p>
+                <p>Guests can wander down to the water's edge, dip their toes in the cool stream on warm afternoons, or simply sit and watch the dragonflies dance across the surface.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ********** AMENITIES SECTION – NOW WITH REAL IMAGES ********** -->
+    <section class="section" id="amenities">
+        <p class="section-label">Enjoy</p>
+        <h2 class="section-title">Amenities & Experiences</h2>
+        <div class="section-divider"></div>
+        <div class="amenities-grid">
+            <!-- Garden-to-Table Dining -->
+            <div class="amenity-card reveal">
+                <div class="amenity-icon-wrap">
+                    <img src="https://i.pinimg.com/1200x/0b/68/f2/0b68f23e83104e3057b8d79bc6ba7d7c.jpg" alt="Garden dining" class="icon">
+                </div>
+                <div class="amenity-card-body">
+                    <h4>Garden-to-Table Dining</h4>
+                    <p class="desc">Fresh, seasonal cuisine prepared with herbs and vegetables from our own garden, served al fresco under the open sky.</p>
+                </div>
+            </div>
+            <!-- Pool & Games Lounge -->
+            <div class="amenity-card reveal">
+                <div class="amenity-icon-wrap">
+                    <img src="https://i.pinimg.com/736x/bb/fe/cb/bbfecb8ada4c74efff6de5c0f93d58b1.jpg" alt="Pool table" class="icon">
+                </div>
+                <div class="amenity-card-body">
+                    <h4>Pool & Games Lounge</h4>
+                    <p class="desc">A stylish recreational space featuring a pool table, board games, and a cozy lounge — perfect for guests to unwind between events.</p>
+                </div>
+            </div>
+            <!-- Relaxation Nooks -->
+            <div class="amenity-card reveal">
+                <div class="amenity-icon-wrap">
+                    <img src="https://i.pinimg.com/736x/d2/ff/49/d2ff498fc8c3044ceea9c0b760e74fdb.jpg" alt="Relaxaction in a garden" class="icon">
+                </div>
+                <div class="amenity-card-body">
+                    <h4>Relaxation Nooks</h4>
+                    <p class="desc">Scattered throughout the gardens are hammocks, daybeds, and shaded seating areas designed for quiet moments of peace.</p>
+                </div>
+            </div>
+            <!-- Flower Arrangement Studio -->
+            <div class="amenity-card reveal">
+                <div class="amenity-icon-wrap">
+                    <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=150&h=150&fit=crop" alt="Flower bouquet" class="icon">
+                </div>
+                <div class="amenity-card-body">
+                    <h4>Flower Arrangement Studio</h4>
+                    <p class="desc">Create your own bouquets from our cutting garden, guided by our in-house florist — a delightful activity for wedding parties.</p>
+                </div>
+            </div>
+            <!-- Evening Fire Pit -->
+            <div class="amenity-card reveal">
+                <div class="amenity-icon-wrap">
+                    <img src="https://i.pinimg.com/736x/8b/8a/04/8b8a04bd02e5c2700582f5f40ff6884b.jpg" alt="Fire pit at night" class="icon">
+                </div>
+                <div class="amenity-card-body">
+                    <h4>Evening Fire Pit</h4>
+                    <p class="desc">As night falls, gather around the stone fire pit for stories, toasted marshmallows, and starlit conversations.</p>
+                </div>
+            </div>
+            <!-- Picture-Perfect Spots -->
+            <div class="amenity-card reveal">
+                <div class="amenity-icon-wrap">
+                    <img src="https://i.pinimg.com/736x/e8/91/36/e89136a9187ae57e9fd9f4b13b65079d.jpg" alt="Scenic garden photo spot" class="icon">
+                </div>
+                <div class="amenity-card-body">
+                    <h4>Picture-Perfect Spots</h4>
+                    <p class="desc">Curated photo points throughout the property — from the rose archway to the river bend — ensure unforgettable memories.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="gallery">
+        <p class="section-label">Visual Journey</p>
+        <h2 class="section-title">A Glimpse of Paradise</h2>
+        <div class="section-divider"></div>
+        <div class="gallery-masonry">
+            <div class="gallery-item tall"><img src="https://images.unsplash.com/photo-1510076857177-7470076d4098?w=500&q=80" alt="Garden view" loading="lazy"><div class="gallery-overlay"><span>Gardens</span></div></div>
+            <div class="gallery-item wide"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&q=80" alt="Wedding arch" loading="lazy"><div class="gallery-overlay"><span>Ceremony Arch</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80" alt="Dining" loading="lazy"><div class="gallery-overlay"><span>Dining</span></div></div>
+            <div class="gallery-item tall"><img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=500&q=80" alt="Flowers" loading="lazy"><div class="gallery-overlay"><span>Blooms</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=400&q=80" alt="River" loading="lazy"><div class="gallery-overlay"><span>River</span></div></div>
+            <div class="gallery-item wide"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80" alt="Evening lights" loading="lazy"><div class="gallery-overlay"><span>Evening Glow</span></div></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=400&q=80" alt="Relaxation area" loading="lazy"><div class="gallery-overlay"><span>Relax</span></div></div>
+        </div>
+    </section>
+
+    <section class="section" id="testimonials">
+        <p class="section-label">Kind Words</p>
+        <h2 class="section-title">From Our Guests</h2>
+        <div class="section-divider"></div>
+        <div class="testimonial-slider reveal">
+            <div class="testimonial-card">
+                "Elmak Gardens was the wedding venue of our dreams. The river, the flowers, the incredible food — every detail was perfection. Our guests are still talking about it months later."
+                <p class="testimonial-author">— Sarah & Michael, Married at Elmak</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <p class="section-label">Get in Touch</p>
+        <h2 class="section-title">Plan Your Visit</h2>
+        <div class="section-divider"></div>
+        <div class="contact-wrapper">
+            <div class="contact-info reveal">
+                <h3>Let's Create Something Beautiful Together</h3>
+                <p>Whether you're planning a wedding, a corporate retreat, or simply want to spend a peaceful afternoon in the gardens, we'd love to hear from you. Come visit us and experience Elmak Gardens in person — the river is waiting.</p>
+                <div class="contact-detail"><span class="cd-icon">📍</span><span>Elmak Gardens, Riverside Lane, Kenya</span></div>
+                <div class="contact-detail"><span class="cd-icon">📞</span><span>+254 700 123 456</span></div>
+                <div class="contact-detail"><span class="cd-icon">✉️</span><span>hello@elmakgardens.com</span></div>
+            </div>
+            <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <input type="text" placeholder="Event Type (e.g., Wedding, Party, Visit)">
+                <textarea placeholder="Tell us about your dream event..." rows="4"></textarea>
+                <button type="submit" class="btn btn-primary">Send Enquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">Elmak <span>Gardens</span></div>
+        <p>Where nature meets celebration — since 2010</p>
+        <div class="footer-social">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Pinterest</a>
+            <a href="#">Contact</a>
+        </div>
+        <p style="margin-top:1.5rem;opacity:0.6;">&copy; 2026 Elmak Gardens. All rights reserved. Crafted with love in Kenya.</p>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 600);
+        });
+
+        const navbar = document.getElementById('navbar');
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function closeMenu() {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!navbar.contains(e.target) && navLinks.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        const galleryItems = document.querySelectorAll('.gallery-item, .wedding-card, .amenity-card');
+        const galleryObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 60);
+                    galleryObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+        galleryItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            galleryObserver.observe(item);
+        });
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.textContent = '✓ Message Sent!';
+                btn.style.background = '#2d5a3f';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                    e.target.reset();
+                }, 2500);
+            }, 1200);
+        }
+
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            const scrollY = window.scrollY;
+            if (scrollY < window.innerHeight) {
+                const slider = hero.querySelector('.hero-slider');
+                slider.style.transform = `translateY(${scrollY * 0.35}px)`;
+                const content = hero.querySelector('.hero-content');
+                content.style.transform = `translateY(${scrollY * 0.15}px)`;
+                content.style.opacity = 1 - (scrollY / (window.innerHeight * 0.8));
+            }
+        });
+    </script>
+</body>
+</html>
