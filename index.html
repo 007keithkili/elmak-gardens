@@ -506,49 +506,97 @@
             flex-shrink: 0;
         }
 
+        /* ============ IMAGE RIBBON – CARD STRIP, NO OVERLAP ============ */
         .image-ribbon {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            height: 350px;
-            overflow: hidden;
+            position: relative;
+            z-index: 5;
+            margin-top: 2rem;
+            padding: 0 3rem 3rem;
+            display: flex;
+            gap: 1.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1300px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .image-ribbon-item {
+            flex: 1 1 220px;
+            max-width: 280px;
+            min-width: 200px;
             position: relative;
+            border-radius: var(--radius-lg);
             overflow: hidden;
             cursor: pointer;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+            transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+            aspect-ratio: 3/4;
+            background: var(--white);
+        }
+        .image-ribbon-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
         }
         .image-ribbon-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.7s ease;
             display: block;
+            transition: transform 0.8s ease;
         }
         .image-ribbon-item:hover img {
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
         .image-ribbon-item .ribbon-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(26, 60, 42, 0.35);
+            background: linear-gradient(180deg,
+                    rgba(26, 60, 42, 0.05) 0%,
+                    rgba(26, 60, 42, 0.25) 50%,
+                    rgba(26, 60, 42, 0.65) 100%);
             transition: background var(--transition);
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
+            padding-bottom: 1.8rem;
         }
         .image-ribbon-item:hover .ribbon-overlay {
-            background: rgba(26, 60, 42, 0.15);
+            background: linear-gradient(180deg,
+                    rgba(26, 60, 42, 0.0) 0%,
+                    rgba(26, 60, 42, 0.15) 50%,
+                    rgba(26, 60, 42, 0.5) 100%);
         }
         .ribbon-label {
             color: var(--white);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             letter-spacing: 2px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-            transition: transform var(--transition);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+            transition: transform var(--transition), letter-spacing var(--transition);
+            text-align: center;
+            line-height: 1.2;
         }
         .image-ribbon-item:hover .ribbon-label {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
+            letter-spacing: 3px;
+            color: var(--gold-light);
+        }
+        .image-ribbon-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 15%;
+            width: 70%;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.5s ease;
+            z-index: 2;
+        }
+        .image-ribbon-item:hover::after {
+            transform: scaleX(1);
         }
 
         #weddings {
@@ -652,7 +700,7 @@
             margin-bottom: 1rem;
         }
 
-        /* ---------- AMENITIES (updated with real images) ---------- */
+        /* ---------- AMENITIES (unchanged) ---------- */
         #amenities {
             background: var(--cream-dark);
             position: relative;
@@ -1022,7 +1070,17 @@
             .amenities-grid { gap: 2rem; }
             .amenity-card { flex: 1 1 250px; max-width: 300px; }
             .gallery-masonry { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 180px; }
-            .image-ribbon { grid-template-columns: repeat(2, 1fr); height: auto; grid-auto-rows: 250px; }
+            .image-ribbon {
+                margin-top: 1.5rem;
+                padding: 0 2rem 2.5rem;
+                gap: 1.2rem;
+            }
+            .image-ribbon-item {
+                flex: 1 1 180px;
+                max-width: 220px;
+                min-width: 160px;
+            }
+            .ribbon-label { font-size: 1.2rem; letter-spacing: 1px; }
             .nav-links { display: none; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: rgba(250, 247, 242, 0.98); backdrop-filter: blur(20px); flex-direction: column; padding: 6rem 2rem 2rem; gap: 1.8rem; box-shadow: var(--shadow-xl); z-index: 999; transform: translateX(100%); transition: transform var(--transition); }
             .nav-links.active { display: flex; transform: translateX(0); }
             .nav-links a { color: var(--text-medium) !important; text-shadow: none !important; font-size: 0.95rem; }
@@ -1044,7 +1102,15 @@
             .gallery-masonry { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; gap: 0.6rem; }
             .gallery-item.wide { grid-column: span 1; }
             .gallery-item.tall { grid-row: span 1; }
-            .image-ribbon { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; }
+            .image-ribbon {
+                margin-top: 1rem;
+                padding: 0 1rem 2rem;
+                gap: 1rem;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+            .image-ribbon-item { max-width: none; min-width: auto; aspect-ratio: 3/4; }
+            .ribbon-label { font-size: 1.1rem; }
             .hero-buttons { flex-direction: column; align-items: center; }
             .btn { padding: 0.75rem 2rem; font-size: 0.8rem; letter-spacing: 1.5px; }
             .contact-form { padding: 1.5rem; }
@@ -1054,7 +1120,14 @@
             .hero-title { font-size: 2.2rem; }
             .hero-tag { font-size: 1.2rem; }
             .gallery-masonry { grid-template-columns: 1fr 1fr; grid-auto-rows: 130px; gap: 0.4rem; }
-            .image-ribbon { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+            .image-ribbon {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.7rem;
+                margin-top: 0.8rem;
+                padding: 0 0.8rem 1.5rem;
+            }
+            .image-ribbon-item { aspect-ratio: 3/4; }
+            .ribbon-label { font-size: 1rem; letter-spacing: 1px; padding-bottom: 0.4rem; }
             .navbar { padding: 0.8rem 1.2rem; }
             .nav-logo { font-size: 1.4rem; }
         }
@@ -1100,11 +1173,24 @@
         </div>
     </section>
 
+    <!-- ============ IMAGE RIBBON (your links, refined card layout) ============ -->
     <div class="image-ribbon">
-        <div class="image-ribbon-item"><img src="https://i.pinimg.com/736x/05/09/ae/0509ae560e8b804e8a2bfc5794bb6a89.jpg" alt="Garden landscape" loading="lazy"><div class="ribbon-overlay"><span class="ribbon-label">Lush Gardens</span></div></div>
-        <div class="image-ribbon-item"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80" alt="Wedding setup" loading="lazy"><div class="ribbon-overlay"><span class="ribbon-label">Weddings</span></div></div>
-        <div class="image-ribbon-item"><img src="https://i.pinimg.com/1200x/da/51/f5/da51f557a0c69ac8ded09dbcced9122d.jpg" alt="River view" loading="lazy"><div class="ribbon-overlay"><span class="ribbon-label">The River</span></div></div>
-        <div class="image-ribbon-item"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Dining area" loading="lazy"><div class="ribbon-overlay"><span class="ribbon-label">Dining</span></div></div>
+        <div class="image-ribbon-item">
+            <img src="https://i.pinimg.com/736x/05/09/ae/0509ae560e8b804e8a2bfc5794bb6a89.jpg" alt="Garden landscape" loading="lazy">
+            <div class="ribbon-overlay"><span class="ribbon-label">Lush Gardens</span></div>
+        </div>
+        <div class="image-ribbon-item">
+            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80" alt="Wedding setup" loading="lazy">
+            <div class="ribbon-overlay"><span class="ribbon-label">Weddings</span></div>
+        </div>
+        <div class="image-ribbon-item">
+            <img src="https://i.pinimg.com/1200x/da/51/f5/da51f557a0c69ac8ded09dbcced9122d.jpg" alt="River view" loading="lazy">
+            <div class="ribbon-overlay"><span class="ribbon-label">The River</span></div>
+        </div>
+        <div class="image-ribbon-item">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Dining area" loading="lazy">
+            <div class="ribbon-overlay"><span class="ribbon-label">Dining</span></div>
+        </div>
     </div>
 
     <section class="section" id="about">
@@ -1154,71 +1240,35 @@
         </div>
     </section>
 
-    <!-- ********** AMENITIES SECTION – NOW WITH REAL IMAGES ********** -->
+    <!-- ********** AMENITIES SECTION (your images) ********** -->
     <section class="section" id="amenities">
         <p class="section-label">Enjoy</p>
         <h2 class="section-title">Amenities & Experiences</h2>
         <div class="section-divider"></div>
         <div class="amenities-grid">
-            <!-- Garden-to-Table Dining -->
             <div class="amenity-card reveal">
-                <div class="amenity-icon-wrap">
-                    <img src="https://i.pinimg.com/1200x/0b/68/f2/0b68f23e83104e3057b8d79bc6ba7d7c.jpg" alt="Garden dining" class="icon">
-                </div>
-                <div class="amenity-card-body">
-                    <h4>Garden-to-Table Dining</h4>
-                    <p class="desc">Fresh, seasonal cuisine prepared with herbs and vegetables from our own garden, served al fresco under the open sky.</p>
-                </div>
+                <div class="amenity-icon-wrap"><img src="https://i.pinimg.com/1200x/0b/68/f2/0b68f23e83104e3057b8d79bc6ba7d7c.jpg" alt="Garden dining" class="icon"></div>
+                <div class="amenity-card-body"><h4>Garden-to-Table Dining</h4><p class="desc">Fresh, seasonal cuisine prepared with herbs and vegetables from our own garden, served al fresco under the open sky.</p></div>
             </div>
-            <!-- Pool & Games Lounge -->
             <div class="amenity-card reveal">
-                <div class="amenity-icon-wrap">
-                    <img src="https://i.pinimg.com/736x/bb/fe/cb/bbfecb8ada4c74efff6de5c0f93d58b1.jpg" alt="Pool table" class="icon">
-                </div>
-                <div class="amenity-card-body">
-                    <h4>Pool & Games Lounge</h4>
-                    <p class="desc">A stylish recreational space featuring a pool table, board games, and a cozy lounge — perfect for guests to unwind between events.</p>
-                </div>
+                <div class="amenity-icon-wrap"><img src="https://i.pinimg.com/736x/bb/fe/cb/bbfecb8ada4c74efff6de5c0f93d58b1.jpg" alt="Pool table" class="icon"></div>
+                <div class="amenity-card-body"><h4>Pool & Games Lounge</h4><p class="desc">A stylish recreational space featuring a pool table, board games, and a cozy lounge — perfect for guests to unwind between events.</p></div>
             </div>
-            <!-- Relaxation Nooks -->
             <div class="amenity-card reveal">
-                <div class="amenity-icon-wrap">
-                    <img src="https://i.pinimg.com/736x/d2/ff/49/d2ff498fc8c3044ceea9c0b760e74fdb.jpg" alt="Relaxaction in a garden" class="icon">
-                </div>
-                <div class="amenity-card-body">
-                    <h4>Relaxation Nooks</h4>
-                    <p class="desc">Scattered throughout the gardens are hammocks, daybeds, and shaded seating areas designed for quiet moments of peace.</p>
-                </div>
+                <div class="amenity-icon-wrap"><img src="https://i.pinimg.com/736x/d2/ff/49/d2ff498fc8c3044ceea9c0b760e74fdb.jpg" alt="Relaxation in a garden" class="icon"></div>
+                <div class="amenity-card-body"><h4>Relaxation Nooks</h4><p class="desc">Scattered throughout the gardens are hammocks, daybeds, and shaded seating areas designed for quiet moments of peace.</p></div>
             </div>
-            <!-- Flower Arrangement Studio -->
             <div class="amenity-card reveal">
-                <div class="amenity-icon-wrap">
-                    <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=150&h=150&fit=crop" alt="Flower bouquet" class="icon">
-                </div>
-                <div class="amenity-card-body">
-                    <h4>Flower Arrangement Studio</h4>
-                    <p class="desc">Create your own bouquets from our cutting garden, guided by our in-house florist — a delightful activity for wedding parties.</p>
-                </div>
+                <div class="amenity-icon-wrap"><img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=150&h=150&fit=crop" alt="Flower bouquet" class="icon"></div>
+                <div class="amenity-card-body"><h4>Flower Arrangement Studio</h4><p class="desc">Create your own bouquets from our cutting garden, guided by our in-house florist — a delightful activity for wedding parties.</p></div>
             </div>
-            <!-- Evening Fire Pit -->
             <div class="amenity-card reveal">
-                <div class="amenity-icon-wrap">
-                    <img src="https://i.pinimg.com/736x/8b/8a/04/8b8a04bd02e5c2700582f5f40ff6884b.jpg" alt="Fire pit at night" class="icon">
-                </div>
-                <div class="amenity-card-body">
-                    <h4>Evening Fire Pit</h4>
-                    <p class="desc">As night falls, gather around the stone fire pit for stories, toasted marshmallows, and starlit conversations.</p>
-                </div>
+                <div class="amenity-icon-wrap"><img src="https://i.pinimg.com/736x/8b/8a/04/8b8a04bd02e5c2700582f5f40ff6884b.jpg" alt="Fire pit at night" class="icon"></div>
+                <div class="amenity-card-body"><h4>Evening Fire Pit</h4><p class="desc">As night falls, gather around the stone fire pit for stories, toasted marshmallows, and starlit conversations.</p></div>
             </div>
-            <!-- Picture-Perfect Spots -->
             <div class="amenity-card reveal">
-                <div class="amenity-icon-wrap">
-                    <img src="https://i.pinimg.com/736x/e8/91/36/e89136a9187ae57e9fd9f4b13b65079d.jpg" alt="Scenic garden photo spot" class="icon">
-                </div>
-                <div class="amenity-card-body">
-                    <h4>Picture-Perfect Spots</h4>
-                    <p class="desc">Curated photo points throughout the property — from the rose archway to the river bend — ensure unforgettable memories.</p>
-                </div>
+                <div class="amenity-icon-wrap"><img src="https://i.pinimg.com/736x/e8/91/36/e89136a9187ae57e9fd9f4b13b65079d.jpg" alt="Scenic garden photo spot" class="icon"></div>
+                <div class="amenity-card-body"><h4>Picture-Perfect Spots</h4><p class="desc">Curated photo points throughout the property — from the rose archway to the river bend — ensure unforgettable memories.</p></div>
             </div>
         </div>
     </section>
